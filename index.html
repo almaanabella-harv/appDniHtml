@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DNI Argentino - Formulario</title>
+    <link rel="stylesheet" href="styles/css.css">
+    </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🇦🇷 DNI Argentino</h1>
+            <p>Documento Nacional de Identidad - República Argentina</p>
+        </div>
+
+        <div class="form-container">
+            <form id="dniForm">
+                <div class="form-section">
+                    <h3>Datos Personales</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="nombre">Nombre y Apellido *</label>
+                            <input type="text" id="nombre" name="nombre" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="sexo">Sexo *</label>
+                            <select id="sexo" name="sexo" required>
+                                <option value="">Seleccione...</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                <option value="X">X</option>
+                            </select>
+                            <div class="error-message">Debe seleccionar una opción</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="documento">Número de Documento *</label>
+                            <input type="text" id="documento" name="documento" pattern="[0-9]{7,8}" maxlength="8" required>
+                            <div class="error-message">Debe contener entre 7 y 8 dígitos</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ejemplar">Ejemplar *</label>
+                            <select id="ejemplar" name="ejemplar" required>
+                                <option value="">Seleccione...</option>
+                                <option value="A">A</option>
+                                <option value="B">B</option>
+                                <option value="C">C</option>
+                                <option value="D">D</option>
+                            </select>
+                            <div class="error-message">Debe seleccionar un ejemplar</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fechaNacimiento">Fecha de Nacimiento *</label>
+                            <input type="date" id="fechaNacimiento" name="fechaNacimiento" required>
+                            <div class="error-message">Debe ingresar una fecha válida</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="lugarNacimiento">Lugar de Nacimiento *</label>
+                            <input type="text" id="lugarNacimiento" name="lugarNacimiento" required>
+                            <div class="error-message">Este campo es obligatorio</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Datos de Emisión</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fechaEmision">Fecha de Emisión *</label>
+                            <input type="date" id="fechaEmision" name="fechaEmision" required>
+                            <div class="error-message">Debe ingresar una fecha válida</div>
+                        </div>
+                        <div class="form-group">
+                            <label for="fechaVencimiento">Fecha de Vencimiento *</label>
+                            <input type="date" id="fechaVencimiento" name="fechaVencimiento" required>
+                            <div class="error-message">Debe ingresar una fecha válida</div>
+                        </div>
+                    </div>
+                    <div class="form-row single">
+                        <div class="form-group">
+                            <label for="numeroTramite">Número de Trámite *</label>
+                            <input type="text" id="numeroTramite" name="numeroTramite" pattern="[0-9]{12}" maxlength="12" required>
+                            <div class="error-message">Debe contener exactamente 12 dígitos</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <h3>Identificación</h3>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="foto">Fotografía (150x200px)</label>
+                            <div class="file-upload">
+                                <input type="file" id="foto" name="foto" accept="image/*">
+                                <label for="foto" class="file-upload-label">
+                                    📷 Seleccionar Fotografía
+                                </label>
+                            </div>
+                            <div class="file-preview" id="fotoPreview"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="firma">Firma</label>
+                            <div class="file-upload">
+                                <input type="file" id="firma" name="firma" accept="image/*">
+                                <label for="firma" class="file-upload-label">
+                                    ✍️ Seleccionar Firma
+                                </label>
+                            </div>
+                            <div class="file-preview" id="firmaPreview"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-visualizar" onclick="visualizarDNI()">
+                    👁️ Visualizar DNI
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div id="dniModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>📄 DNI Argentino</h2>
+                <span class="close" onclick="cerrarModal()">&times;</span>
+            </div>
+            <div class="dni-card">
+                <div class="dni-header">
+                    <h3>DNI Argentino</h3>
+                    <p>Documento Nacional de Identidad - República Argentina</p>
+                </div>
+                <div class="dni-content">
+                    <div class="dni-data">
+                        <div class="dni-section">
+                            <h4>📋 Datos Personales</h4>
+                            <div class="dni-field">
+                                <strong>Nombre:</strong>
+                                <span id="modal-nombre">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>Sexo:</strong>
+                                <span id="modal-sexo">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>Documento:</strong>
+                                <span id="modal-documento">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>Ejemplar:</strong>
+                                <span id="modal-ejemplar">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>F. Nacimiento:</strong>
+                                <span id="modal-fechaNacimiento">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>Lugar Nac.:</strong>
+                                <span id="modal-lugarNacimiento">-</span>
+                            </div>
+                        </div>
+                        
+                        <div class="dni-section">
+                            <h4>📅 Datos de Emisión</h4>
+                            <div class="dni-field">
+                                <strong>F. Emisión:</strong>
+                                <span id="modal-fechaEmision">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>F. Vencimiento:</strong>
+                                <span id="modal-fechaVencimiento">-</span>
+                            </div>
+                            <div class="dni-field">
+                                <strong>N° Trámite:</strong>
+                                <span id="modal-numeroTramite">-</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dni-photo">
+                        <div class="photo-container">
+                            <div id="modal-foto" class="photo-placeholder">Sin fotografía</div>
+                        </div>
+                        <div class="signature-container">
+                            <div id="modal-firma" class="signature-placeholder">Firma</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+        // Variables para almacenar las imágenes
+        let fotoData = null;
+        let firmaData = null;
+
+        // Event listeners para archivos
+        document.getElementById('foto').addEventListener('change', function(e) {
+            handleFileUpload(e, 'fotoPreview', 'foto');
+        });
+
+        document.getElementById('firma').addEventListener('change', function(e) {
+            handleFileUpload(e, 'firmaPreview', 'firma');
+        });
+
+        // Función para manejar la carga de archivos
+        function handleFileUpload(event, previewId, type) {
+            const file = event.target.files[0];
+            const preview = document.getElementById(previewId);
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.createElement('img');
+                    img.src = e.target.result;
+                    img.alt = type;
+                    preview.innerHTML = '';
+                    preview.appendChild(img);
+                    
+                    // Guardar datos de la imagen
+                    if (type === 'foto') {
+                        fotoData = e.target.result;
+                    } else {
+                        firmaData = e.target.result;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        // Función para validar campos
+        function validarCampo(campo) {
+            const grupo = campo.parentElement;
+            const mensaje = grupo.querySelector('.error-message');
+            let esValido = true;
+
+            // Remover clase de error
+            grupo.classList.remove('error');
+            mensaje.style.display = 'none';
+
+            // Validaciones específicas
+            if (campo.hasAttribute('required') && !campo.value.trim()) {
+                esValido = false;
+                mensaje.textContent = 'Este campo es obligatorio';
+            } else if (campo.type === 'date' && campo.value) {
+                const fecha = new Date(campo.value);
+                const hoy = new Date();
+                
+                if (campo.id === 'fechaNacimiento') {
+                    if (fecha > hoy) {
+                        esValido = false;
+                        mensaje.textContent = 'La fecha no puede ser futura';
+                    }
+                } else if (campo.id === 'fechaVencimiento') {
+                    const fechaEmision = new Date(document.getElementById('fechaEmision').value);
+                    if (fecha <= fechaEmision) {
+                        esValido = false;
+                        mensaje.textContent = 'Debe ser posterior a la fecha de emisión';
+                    }
+                }
+            } else if (campo.hasAttribute('pattern')) {
+                const pattern = new RegExp(campo.getAttribute('pattern'));
+                if (campo.value && !pattern.test(campo.value)) {
+                    esValido = false;
+                    if (campo.id === 'documento') {
+                        mensaje.textContent = 'Debe contener entre 7 y 8 dígitos';
+                    } else if (campo.id === 'numeroTramite') {
+                        mensaje.textContent = 'Debe contener exactamente 12 dígitos';
+                    }
+                }
+            }
+
+            if (!esValido) {
+                grupo.classList.add('error');
+                mensaje.style.display = 'block';
+            }
+
+            return esValido;
+        }
+
+        // Agregar validación en tiempo real
+        document.querySelectorAll('input, select').forEach(campo => {
+            campo.addEventListener('blur', () => validarCampo(campo));
+            campo.addEventListener('input', () => {
+                if (campo.parentElement.classList.contains('error')) {
+                    validarCampo(campo);
+                }
+            });
+        });
+
+        // Función para formatear fecha
+        function formatearFecha(fechaISO) {
+            if (!fechaISO) return '-';
+            const fecha = new Date(fechaISO + 'T00:00:00');
+            return fecha.toLocaleDateString('es-AR');
+        }
+
+        // Función para visualizar DNI
+        function visualizarDNI() {
+            const form = document.getElementById('dniForm');
+            const campos = form.querySelectorAll('input[required], select[required]');
+            let formularioValido = true;
+
+            // Validar todos los campos requeridos
+            campos.forEach(campo => {
+                if (!validarCampo(campo)) {
+                    formularioValido = false;
+                }
+            });
+
+            if (!formularioValido) {
+                alert('⚠️ Por favor, complete todos los campos obligatorios correctamente.');
+                return;
+            }
+
+            // Llenar datos en el modal
+            document.getElementById('modal-nombre').textContent = document.getElementById('nombre').value;
+            document.getElementById('modal-sexo').textContent = document.getElementById('sexo').value;
+            document.getElementById('modal-documento').textContent = document.getElementById('documento').value;
+            document.getElementById('modal-ejemplar').textContent = document.getElementById('ejemplar').value;
+            document.getElementById('modal-fechaNacimiento').textContent = formatearFecha(document.getElementById('fechaNacimiento').value);
+            document.getElementById('modal-lugarNacimiento').textContent = document.getElementById('lugarNacimiento').value;
+            document.getElementById('modal-fechaEmision').textContent = formatearFecha(document.getElementById('fechaEmision').value);
+            document.getElementById('modal-fechaVencimiento').textContent = formatearFecha(document.getElementById('fechaVencimiento').value);
+            document.getElementById('modal-numeroTramite').textContent = document.getElementById('numeroTramite').value;
+
+            // Mostrar foto
+            const modalFoto = document.getElementById('modal-foto');
+            if (fotoData) {
+                modalFoto.innerHTML = `<img src="${fotoData}" alt="Fotografía">`;
+            } else {
+                modalFoto.innerHTML = '<div class="photo-placeholder">Sin fotografía</div>';
+            }
+
+            // Mostrar firma
+            const modalFirma = document.getElementById('modal-firma');
+            if (firmaData) {
+                modalFirma.innerHTML = `<img src="${firmaData}" alt="Firma">`;
+            } else {
+                modalFirma.innerHTML = '<div class="signature-placeholder">Firma</div>';
+            }
+
+            // Mostrar modal
+            document.getElementById('dniModal').style.display = 'block';
+        }
+
+        // Función para cerrar modal
+        function cerrarModal() {
+            document.getElementById('dniModal').style.display = 'none';
+        }
+
+        // Cerrar modal al hacer click fuera de él
+        window.onclick = function(event) {
+            const modal = document.getElementById('dniModal');
+            if (event.target == modal) {
+                cerrarModal();
+            }
+        }
+
+        // Cerrar modal con ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                cerrarModal();
+            }
+        });
+    </script>
+</body>
+</html>
