@@ -6,7 +6,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #c388cbe0 0%, #c388cbe0 100%);
             min-height: 100vh;
             padding: 20px;
         }
@@ -21,7 +21,7 @@
         }
 
         .header {
-            background: linear-gradient(135deg, #2c3e50, #4a90e2);
+            background: linear-gradient(135deg, #462c50, #c14ae2cc);
             color: white;
             padding: 30px;
             text-align: center;
@@ -51,7 +51,7 @@
             font-size: 1.4em;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 3px solid #4a90e2;
+            border-bottom: 3px solid #894ae2;
             display: flex;
             align-items: center;
         }
@@ -98,7 +98,7 @@
         .form-group input:focus,
         .form-group select:focus {
             outline: none;
-            border-color: #4a90e2;
+            border-color: #be4ae2;
             background: white;
             box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
             transform: translateY(-2px);
@@ -136,17 +136,17 @@
             align-items: center;
             justify-content: center;
             padding: 12px 15px;
-            border: 2px dashed #4a90e2;
+            border: 2px dashed #caaad8;
             border-radius: 10px;
             background: #f0f7ff;
-            color: #4a90e2;
+            color: #caaad8;
             font-weight: 600;
             transition: all 0.3s ease;
         }
 
         .file-upload:hover .file-upload-label {
             background: #e6f3ff;
-            border-color: #357abd;
+            border-color: #c067ac;
         }
 
         .file-preview {
@@ -162,7 +162,7 @@
         }
 
         .btn-visualizar {
-            background: linear-gradient(135deg, #4a90e2, #357abd);
+            background: linear-gradient(135deg, #c94ae2, #bd35bd);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -214,7 +214,7 @@
         }
 
         .modal-header {
-            background: linear-gradient(135deg, #2c3e50, #4a90e2);
+            background: linear-gradient(135deg, #2c3e50, #df4ae2);
             color: white;
             padding: 20px 30px;
             display: flex;
@@ -243,7 +243,7 @@
         }
 
         .dni-card {
-            background: linear-gradient(135deg, #87ceeb, #4682b4);
+            background: linear-gradient(135deg, #cd87eb, #8446b4);
             margin: 30px;
             padding: 25px;
             border-radius: 15px;
